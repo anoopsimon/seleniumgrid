@@ -10,6 +10,12 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    healthcheck:
+      test: ["CMD", "/opt/bin/check-grid.sh", "--host", "0.0.0.0", "--port", "4444"]
+      interval: 15s
+      timeout: 15s
+      retries: 3
+      start_period: 30s
 
   chrome:
     image: selenium/node-chrome:${SELENIUM_VERSION}
